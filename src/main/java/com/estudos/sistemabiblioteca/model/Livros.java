@@ -5,6 +5,8 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,14 +30,17 @@ public class Livros {
     @NotNull
     private boolean disponivel;
 
+    @ManyToMany(mappedBy = "livros")
+    private List<Emprestimos> historicoEmprestimos;
 
-    public Livros(Long id, String titulo, String autor, String isbn, Genero genero, boolean disponivel) {
+    public Livros(Long id, String titulo, String autor, String isbn, Genero genero, boolean disponivel, List<Emprestimos> historicoEmprestimos) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.genero = genero;
         this.disponivel = disponivel;
+        this.historicoEmprestimos = historicoEmprestimos;
     }
 
     public Livros() {

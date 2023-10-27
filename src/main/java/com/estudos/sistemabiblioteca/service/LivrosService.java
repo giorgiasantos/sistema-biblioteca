@@ -25,6 +25,10 @@ public class LivrosService {
         return Optional.of(livro.get());
     }
 
+    public List<Livros> findLivrosById(List<Long> ids){
+        return livrosRepository.findAllById(ids);
+    }
+
     public Optional<List<Livros>> findLivroByTitulo(String titulo){
         Optional<List<Livros>> livro = livrosRepository.findLivroByTitulo(titulo);
 
@@ -55,6 +59,9 @@ public class LivrosService {
         }
         if(livroEditado != null){
             livroEditado.setDisponivel(livro.isDisponivel());
+        }
+        if(livroEditado != null){
+            livroEditado.setHistoricoEmprestimos(livro.getHistoricoEmprestimos());
         }
 
         return livrosRepository.save(livroEditado);
